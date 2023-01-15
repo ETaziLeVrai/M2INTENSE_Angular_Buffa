@@ -1,6 +1,10 @@
 # M2INTENSE_Angular_Buffa
 
-Pour pouvoir modifier ou ajouter un assignment, il faut se log
+Projet réalisé part Jean--Petez Axel et Tazi Elias
+
+Il y a plusieur choses à noter:
+
+Pour pouvoir modifier ou ajouter un assignment, il faut se login
 Pour se log, il faut cliquer sur le bouton en haut à gauche de la page
 
 Mise en place d’une collection Mongo db pour les matières et les profs
