@@ -1,0 +1,11 @@
+export const dataPourPeuplerBDCourseMaterials = [{"id":1,"nom":"Base de données","professeur":1,"photo":null},
+{"id":2,"nom":"Web","professeur":1,"photo":null},
+{"id":3,"nom":"Droit","professeur":2,"photo":null},
+{"id":4,"nom":"Compta","professeur":2,"photo":null},
+{"id":5,"nom":"Management Projet","professeur":3,"photo":null},
+{"id":6,"nom":"Projet Entreprise","professeur":3,"photo":null},
+{"id":7,"nom":"Alternance","professeur":4,"photo":null},
+{"id":8,"nom":"Management Agile","professeur":5,"photo":null},
+{"id":9,"nom":"Communication","professeur":5,"photo":null},
+{"id":10,"nom":"Android","professeur":1,"photo":null},
+{"id":11,"nom":"Management Entreprise","professeur":4,"photo":null}]

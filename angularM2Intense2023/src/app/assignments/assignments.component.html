@@ -1,0 +1,98 @@
+<h2>{{titre}}</h2>
+
+<main >
+    <button mat-flat-button color="success" (click)="openAddDialog()">
+      <mat-icon mat-list-icon>add_circle</mat-icon> Ajouter un Assignment
+    </button>
+
+  <p>Nb total d'assignments : {{totalDocs}}</p>
+  <p>Nb total de pages : {{totalPages}}</p>
+  <p>Nb assignments par page : <input type="range" min=1 max=100 value=10 (change)="getAssignments()" [(ngModel)]="limit"> {{limit}}</p>
+
+
+  <mat-label><mat-icon mat-list-icon>search</mat-icon> Rechercher un Assignment : </mat-label>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher" #input>
+  </mat-form-field>
+
+  <div class="paginationBtn">
+    <button mat-raised-button color="primary" (click)="premierePage()" [disabled]="page===1"> <mat-icon mat-list-icon>first_page</mat-icon> Première</button>&nbsp;
+    <button mat-raised-button color="primary" (click)="pagePrecedente()" [disabled]="!hasPrevPage"> <mat-icon mat-list-icon>navigate_before</mat-icon>Précédente</button>&nbsp;
+    <button mat-raised-button color="primary" (click)="pageSuivante()" [disabled]="!hasNextPage">Suivante <mat-icon mat-list-icon>navigate_next</mat-icon> </button>&nbsp;
+    <button mat-raised-button color="primary" (click)="dernierePage()" [disabled]="page===totalPages">Dernière <mat-icon mat-list-icon>last_page</mat-icon></button>
+  </div>
+
+  <table 
+  mat-table [dataSource]="dataSource" 
+  class="mat-elevation-z8 demo-table" 
+  matSort
+  (matSortChange)="announceSortChange($event)">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Id</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef > Nom </th>
+      <td mat-cell *matCellDef="let element"  [ngClass]="{'rendu':element.rendu, 'nonRendu':!element.rendu}"> <mat-icon mat-list-icon *ngIf="element.rendu">done</mat-icon> <mat-icon mat-list-icon *ngIf="!element.rendu">close</mat-icon>{{element.nom}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="dateDeRendu">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Date de Rendu </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateDeRendu| date}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="rendu">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Rendu </th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'rendu':element.rendu, 'nonRendu':!element.rendu}"> <p *ngIf="element.rendu; else nonsoumis">
+        Rendu
+      </p>
+      <ng-template #nonsoumis>
+        <p>
+          N'a pas été rendu
+        </p>
+      </ng-template> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="remarque">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Remarque </th>
+      <td mat-cell *matCellDef="let element"> {{element.remarque}} </td>  
+    </ng-container>
+
+    <ng-container matColumnDef="matiere_id">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Matière </th>
+      <td mat-cell *matCellDef="let element"> {{this.assignmentsService.getCourseMaterial(element.matiere_id)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="professeur_id">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Professeur </th>
+      <td mat-cell *matCellDef="let element"> {{this.assignmentsService.getProfessor(element.professeur_id)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="auteur">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Auteur </th>
+      <td mat-cell *matCellDef="let element"> {{element.auteur}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="note">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Note </th>
+      <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="openUpdateDialog(element)"><mat-icon mat-list-icon>edit</mat-icon> Modifier</button> <button mat-raised-button color="warn" (click)="deleteAssignment(element)"><mat-icon mat-list-icon>delete</mat-icon> Supprimer</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row 
+    *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+
+</main>

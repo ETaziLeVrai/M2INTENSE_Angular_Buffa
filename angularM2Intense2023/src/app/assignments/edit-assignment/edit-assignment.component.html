@@ -1,0 +1,83 @@
+<div>
+<mat-dialog-content>
+  <h1>Edition de l'assignment {{this.data.assignment.nom}}</h1>
+  <form [formGroup]="editForm" (submit)="onSaveAssignment()">
+    <div>
+      <h3>N'oubliez pas de vous connecter</h3>
+      <div>
+        <mat-checkbox [checked]="this.data.assignment.rendu" formControlName="rendu">
+          Devoir rendu
+        </mat-checkbox>
+      </div>
+
+    <mat-form-field>
+      <mat-label>Nom Assignment</mat-label>
+      <input matInput placeholder="Edition du nom" formControlName="nom" [disabled]="!this.authService.loggedIn">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Date de Rendu</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Edition de la date" matInput formControlName="dateDeRendu"  [disabled]="!this.authService.loggedIn">
+      <mat-datepicker-toggle matSuffix [for]="picker"  [disabled]="!this.authService.loggedIn">
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+<div>
+    <mat-form-field appearance="fill">
+      <mat-label>Remarque</mat-label>
+      <input matInput placeholder="Remarque" formControlName="remarque" [disabled]="!this.authService.loggedIn">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Matière</mat-label>
+        <mat-select formControlName="matiere">
+          <mat-option *ngFor="let matiere of this.matieres" [value]="matiere">
+            {{matiere.nom}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Professeur</mat-label>
+        <mat-select formControlName="professeur">
+          <mat-option *ngFor="let professeur of this.professeurs" [value]="professeur">
+            {{professeur.nom}} {{professeur.prenom}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Auteur</mat-label>
+      <input matInput placeholder="Auteur" formControlName="auteur" [disabled]="!this.authService.loggedIn">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Note</mat-label>
+      <input matInput placeholder="Note" formControlName="note" [disabled]="!this.authService.loggedIn">
+    </mat-form-field>
+  </div>
+
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button (click)="onNoClick()" type="button">
+      Annuler
+    </button>
+    <button mat-raised-button color="primary"  [disabled]="!this.authService.loggedIn">
+      Sauver
+    </button>
+  </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+ </div>

@@ -1,0 +1,74 @@
+table, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.container {
+  display:flex;
+  flex-direction: column;
+}
+
+.ajouterBtn {
+  align-self: flex-end;
+}
+
+.paginationBtn {
+  align-self: flex-start;
+}
+
+.demo-table {
+  width: 90%;
+}
+
+.mat-column-id {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-column-nom {
+  padding-left: 16px;
+  font-weight: bold;
+}
+
+.mat-column-nom.rendu {
+  color:green;
+}
+
+.mat-column-nom.nonRendu {
+  color:red;
+}
+
+.mat-column-dateRendu {
+  width: 100px;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.mat-column-rendu {
+  width: 100px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-column-rendu.rendu {
+  color:green;
+}
+
+.mat-column-rendu.nonRendu {
+  color:red;
+}
+
+.mat-column-action {
+  width: 100px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-success {
+  background-color: green;
+  color: #fff;
+}
